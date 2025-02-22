@@ -1,9 +1,16 @@
 const button = document.getElementById('btn');
+<<<<<<< HEAD
+=======
+// const Input = "open discord";
+>>>>>>> origin/main
 let page;
 
 const data = [
     { "url": "https://discord.com", "command": "open discord" },
+<<<<<<< HEAD
     {"url":"https://openai.com/index/chatgpt/", "command": "open chat gpt"},
+=======
+>>>>>>> origin/main
     { "url": "https://www.google.com", "command": "open google" },
     { "url": "https://www.youtube.com", "command": "open youtube" },
     { "url": "https://www.facebook.com", "command": "open facebook" },
@@ -51,6 +58,7 @@ const data = [
     { "url": "https://www.nike.com", "command": "open nike" },
     { "url": "https://www.adidas.com", "command": "open adidas" },
     { "url": "https://www.weather.com", "command": "open weather" },
+<<<<<<< HEAD
     { "url": "https://www.speedtest.net", "command": "open speed test" },
     {"url":"http://127.0.0.1:5500/Voice-Launch/index.html","command":"open your self"}
 ];
@@ -68,10 +76,27 @@ voicebtn.addEventListener("click", function() {
 
         let speech = new SpeechSynthesisUtterance(`command confirm opening ${transcript}`);
         speech.lang = "en-US"; 
+=======
+    { "url": "https://www.speedtest.net", "command": "open speed test" }
+];
+
+const voicebtn = document.getElementById("voicebtn")
+voicebtn.addEventListener("click", function () {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-UK";
+    recognition.onresult = function (event) {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        document.getElementById("speech").value = transcript;
+
+        let speech = new SpeechSynthesisUtterance(`Command Confirm opening ${transcript}`);
+        speech.lang = "en-US";
+>>>>>>> origin/main
         speech.rate = 1;
-        speech.pitch = 1; 
+        speech.pitch = 1;
         window.speechSynthesis.speak(speech);
 
+<<<<<<< HEAD
         for(let val of data){
             if(val.command === transcript){
             page = val.url;
@@ -84,6 +109,18 @@ voicebtn.addEventListener("click", function() {
             window.open(page);
                console.log(transcript);
                 voicebtn.classList.remove("active");
+=======
+            const Input = transcript;
+            for (let val of data) {
+                if (val.command == Input) {
+                    page = val.url
+                    break;
+                }
+            }
+            // window.location.href = page
+            window.open(page, "_blank");
+    
+>>>>>>> origin/main
 
         }
             recognition.onend = function() {
@@ -98,3 +135,10 @@ recognition.start();
     recognition.start();
 });
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> origin/main
