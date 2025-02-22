@@ -1,22 +1,31 @@
 body {
-    font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: 100vh;
     margin: 0;
     background-color: #f7e9e9;
+    display: flex;
+
 }
-textarea {
-    width: 80%;
+h1{
+    margin-left: 620px;
+}
+input {
+    width: 20%;
+    display: flex;
+   margin-left:600px ;
     margin-bottom: 21px;
     padding: 10px;
     font-size: 16px;
     background-color:beige;
+    box-shadow: 2px 0px 3px 5px;
+
 }
 button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
 }
+
+
+
