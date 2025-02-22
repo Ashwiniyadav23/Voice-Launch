@@ -60,6 +60,7 @@ const data = [
 
 const voicebtn = document.getElementById("voicebtn")
 voicebtn.addEventListener("click", function () {
+    const tone = document.getElementById('tone');
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
     recognition.lang = "en-UK";
@@ -80,7 +81,10 @@ voicebtn.addEventListener("click", function () {
             }
         }
         if (!page) {
+            tone.play();
             alert("Command not recognized");
+
+
         } else {
             window.open(page);
                console.log(transcript);
