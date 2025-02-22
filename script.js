@@ -73,8 +73,28 @@ voicebtn.addEventListener("click", function() {
     recognition.onresult = function(event) {
         const transcript = event.results[0][0].transcript.toLowerCase();
         document.getElementById("speech").value = transcript;
+
+        let speech = new SpeechSynthesisUtterance(transcript);
+        speech.lang = "en-US"; 
+        speech.rate = 1;
+        speech.pitch = 1; 
+        window.speechSynthesis.speak(speech);
+
+
+
         console.log(transcript);
     };
 
     recognition.start();
 });
+
+
+
+
+// function GetSpeech(){
+//     let speech = new SpeechSynthesisUtterance(transcript);
+//             speech.lang = "en-US"; 
+//             speech.rate = 1;
+//             speech.pitch = 1; 
+//             window.speechSynthesis.speak(speech);
+// }
