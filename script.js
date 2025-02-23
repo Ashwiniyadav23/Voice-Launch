@@ -1,5 +1,6 @@
 const button = document.getElementById('btn');
 const butt = document.getElementById('open');
+const voicebtn = document.getElementById("voicebtn");
 let page;
 let isRecognizing = false;
 
@@ -57,68 +58,84 @@ const data = [
     { "url": "http://127.0.0.1:5500/Voice-Launch/index.html", "command": "open your self" }
 ];
 
-const voicebtn = document.getElementById("voicebtn");
+alert("🚀 Please click the 🎙️ mic icon to search for any site, or type manually and hit the ➕ button to open it in a new tab. {EX: open google} Thank you! 😊")
+const style = document.createElement('style');
 
-voicebtn.addEventListener("click", function () {
+function applyStyles() {
+
+    if(true){
+        style.innerHTML = `
+        @keyframes circle-size {
+            from {
+                width: 250px;
+                height: 250px;
+            }
+            to {
+                width: 300px;
+                height: 300px;
+            }
+        }
+        @keyframes shadow-rotate {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+        .mic.active {
+            animation: pulse 1s infinite;
+        }
+    `;
+    document.head.appendChild(style);
+        style.style.animation = 'none';
+
+    }
+    style.style.animation = 'none';
+    
+}
+
+function handleRecognitionResult(event) {
+    const transcript = event.results[0][0].transcript.toLowerCase();
+    document.getElementById("speech").value = transcript;
+
+    const speech = new SpeechSynthesisUtterance(`Command Confirm  ${transcript}`);
+    speech.lang = "en-US";
+    speech.rate = 1;
+    speech.pitch = 1;
+    window.speechSynthesis.speak(speech);
+
+    page = data.find(val => val.command === transcript)?.url;
+
+    if (!page) {
+        document.getElementById('tone').play();
+        alert("Command not recognized");
+    } else {
+        window.open(page, "_blank");
+        console.log(transcript);
+    }
+}
+
+function startRecognition() {
     if (isRecognizing) {
         console.warn("Speech Recognition is already running.");
         return;
     }
 
-    const tone = document.getElementById('tone');
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = "en-UK";
 
-    recognition.onstart = function () {
-        isRecognizing = true;
-    };
-
-    recognition.onend = function () {
-        isRecognizing = false;
-    };
-
-    recognition.onresult = function (event) {
-        const transcript = event.results[0][0].transcript.toLowerCase();
-        document.getElementById("speech").value = transcript;
-
-        let speech = new SpeechSynthesisUtterance(`Command Confirm opening ${transcript}`);
-        speech.lang = "en-US";
-        speech.rate = 1;
-        speech.pitch = 1;
-        window.speechSynthesis.speak(speech);
-
-        page = null;
-
-        for (let val of data) {
-            if (val.command === transcript) {
-                page = val.url;
-                break;
-            }
-        }
-        if (!page) {
-            tone.play();
-            alert("Command not recognized");
-        } else {
-            window.open(page, "_blank");
-            console.log(transcript);
-        }
-    };
+    recognition.onstart = () => isRecognizing = true;
+    recognition.onend = () => isRecognizing = false;
+    recognition.onresult = handleRecognitionResult;
 
     recognition.start();
-});
+}
 
-butt.addEventListener('click', () => {
+function handleButtonClick() {
     const tone = document.getElementById('tone');
     const transcript = document.getElementById("speech").value.toLowerCase();
-    page = null;
-
-    for (let val of data) {
-        if (val.command === transcript) {
-            page = val.url;
-            break;
-        }
-    }
+    page = data.find(val => val.command === transcript)?.url;
 
     if (!page) {
         tone.play();
@@ -127,4 +144,11 @@ butt.addEventListener('click', () => {
         window.open(page, "_blank");
         console.log(transcript);
     }
+}
+
+voicebtn.addEventListener("click", () => {
+    applyStyles();
+    startRecognition();
 });
+
+butt.addEventListener('click', handleButtonClick);

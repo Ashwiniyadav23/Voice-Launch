@@ -29,6 +29,7 @@ input {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    margin-left: 30px;
 }
 
 input:focus {
@@ -37,13 +38,13 @@ input:focus {
 }
 
 button {
-    padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
     width: 80%;
-    max-width: 150px;
+    max-width: 50px;
+    height: 27%;
     margin-top: 5px;
-    background-color: #007BFF;
+    margin-left: 0px;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -52,7 +53,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    /* background-color: #0056b3; */
 }
 
 .mic {
@@ -105,7 +106,7 @@ button:hover {
     z-index: 3;
 }
 
-.mic-icon::before,
+ .mic-icon::before,
 .mic-icon::after {
     content: '';
     display: block;
@@ -121,7 +122,6 @@ button:hover {
     transform: translate(-50%, 0);
     background-color: #fff;
 }
-
 .mic-icon::after {
     border: 2px solid;
     width: 8px;
@@ -132,7 +132,7 @@ button:hover {
     transform: translate(-50%, 0);
 }
 
-@keyframes circle-size {
+/* @keyframes circle-size {
     from {
         width: 250px;
         height: 250px;
@@ -154,9 +154,10 @@ button:hover {
     }
 }
 
-.mic.active {
+
+.animated:active {
    animation: pulse 1s infinite;
-}
+}  */
 
 @media (max-width: 1056px) {
     body {
