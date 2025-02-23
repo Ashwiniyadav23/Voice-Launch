@@ -75,7 +75,7 @@ button:hover {
     transform: translate(-50%, -50%);
     border-radius: 100%;
     z-index: 2;
-    box-shadow: 0 0 20px 20px #1e3c72;
+    box-shadow: 0 0 20px 20px #302e2e;
 }
 
 .mic::before {
@@ -106,6 +106,7 @@ button:hover {
     border-top: 0;
     margin-top: 20px;
     z-index: 3;
+    cursor: pointer;
 }
 
  .mic-icon::before,
@@ -134,65 +135,74 @@ button:hover {
     transform: translate(-50%, 0);
 }
 
-/* @keyframes circle-size {
-    from {
-        width: 250px;
-        height: 250px;
-    }
 
-    to {
-        width: 300px;
-        height: 300px;
-    }
-}
-
-@keyframes shadow-rotate {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
-
-.animated:active {
-   animation: pulse 1s infinite;
-}  */
-
-@media (max-width: 1056px) {
+@media (max-width: 768px) {
     body {
-        padding: 20px;
-    }
-    #speech {
-        width: 80%;
-        margin: 20px auto;
-    }
-    .mic {
-        margin-top: 50px;
-    }
-    .reco {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        margin-left: 0;
         align-items: center;
     }
-}
 
-@media (max-width: 555px) {
-    #speech {
+    h1 {
+        margin-right: 0;
+        font-size: 1.5em;
+    }
+
+    input {
         width: 90%;
-        margin: 20px auto;
+        margin-left: 0;
+    }
+
+    button {
+        width: 90%;
+        max-width: 100px;
+    }
+
+    .mic {
+        width: 80%;
+        height: auto;
+    }
+
+    .mic::after {
+        width: 200px;
+        height: 200px;
     }
 }
 
-@media (max-width: 385px) {
-    #rem {
-        word-wrap: break-word;
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.2em;
     }
-    #speech {
-        width: 95%;
-        margin: 20px auto;
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        max-width: 80px;
+    }
+
+    .mic::after {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 320px) {
+    h1 {
+        font-size: 1em;
+    }
+
+    input {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+
+    .mic::after {
+        width: 100px;
+        height: 100px;
     }
 }

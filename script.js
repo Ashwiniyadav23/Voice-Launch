@@ -152,5 +152,9 @@ voicebtn.addEventListener("click", () => {
 });
 
 butt.addEventListener('click', handleButtonClick);
-butt.addEventListener('keypress',handleButtonClick);
-  
+butt.addEventListener('keypress', (e) => {
+    e.preventDefault()
+    if (e.key === "Enter") {
+        handleButtonClick();
+    }
+});
