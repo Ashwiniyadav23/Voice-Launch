@@ -1,6 +1,7 @@
 const button = document.getElementById('btn');
 const butt = document.getElementById('open');
 const voicebtn = document.getElementById("voicebtn");
+const speechInput = document.getElementById("speech");
 let page;
 let isRecognizing = false;
 
@@ -105,7 +106,12 @@ function handleRecognitionResult(event) {
     speech.pitch = 1;
     window.speechSynthesis.speak(speech);
 
-    page = data.find(val => val.command === transcript)?.url;
+    for (const item of data) {
+        if (item.command === transcript) {
+            page = item.url;
+            break;
+        }
+    }
 
     if (!page) {
         document.getElementById('tone').play();
@@ -123,7 +129,7 @@ function startRecognition() {
     }
 
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = "en-UK";
+    recognition.lang = "en-US";
 
     recognition.onstart = () => isRecognizing = true;
     recognition.onend = () => isRecognizing = false;
@@ -135,7 +141,12 @@ function startRecognition() {
 function handleButtonClick() {
     const tone = document.getElementById('tone');
     const transcript = document.getElementById("speech").value.toLowerCase();
-    page = data.find(val => val.command === transcript)?.url;
+    for (const item of data) {
+        if (item.command === transcript) {
+            page = item.url;
+            break;
+        }
+    }
 
     if (!page) {
         tone.play();
@@ -152,9 +163,17 @@ voicebtn.addEventListener("click", () => {
 });
 
 butt.addEventListener('click', handleButtonClick);
-butt.addEventListener('keypress', (e) => {
-    e.preventDefault()
+
+speechInput.addEventListener('keydown', (e) => {
     if (e.key === "Enter") {
+        e.preventDefault(); 
         handleButtonClick();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key === 'm') {
+        e.preventDefault(); 
+        startRecognition();
     }
 });
