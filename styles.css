@@ -3,29 +3,97 @@ body {
     flex-direction: column;
     height: 100vh;
     margin: 0;
-    background-color: #f7e9e9;
-    display: flex;
+    background: linear-gradient(135deg, #f7e9e9, #e3f2fd);
+    font-family: 'Arial', sans-serif;
+    margin-left: 40%;
+}
 
+h1 {
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
-h1{
-    margin-left: 620px;
-}
+
 input {
-    width: 20%;
-    display: flex;
-   margin-left:600px ;
-    margin-bottom: 21px;
+    width: 300px;
+    margin-bottom: 20px;
     padding: 10px;
     font-size: 16px;
-    background-color:beige;
-    box-shadow: 2px 0px 3px 5px;
-
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
+
+input:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+}
+
 button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    width: 150px;
+    margin-top: 5px;
+    background-color: #007BFF;
+    margin-right: 0%;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+/* 
+.reco {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 70%;
+} */
+
+
+button:hover {
+    background-color: #0056b3;
+}
+@media (max-width: 1056px) {
+    body {
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+        padding: 20px;
+    }
+    #speech {
+        width: 80%;
+        margin: 20px auto;
+    }
+    .mic {
+        margin-top: 50px;
+    }
+    .reco {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
+@media (max-width: 555px) {
+    #speech {
+        width: 90%;
+        margin: 20px auto;
+    }
+}
 
-
+@media (max-width: 385px) {
+    #rem {
+        word-wrap: break-word;
+    }
+    #speech {
+        width: 95%;
+        margin: 20px auto;
+    }
+}

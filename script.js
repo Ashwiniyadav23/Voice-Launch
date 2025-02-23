@@ -1,11 +1,11 @@
 const button = document.getElementById('btn');
+const butt = document.getElementById('open');
 let page;
+let isRecognizing = false;
 
 const data = [
     { "url": "https://discord.com", "command": "open discord" },
-
-    {"url":"https://openai.com/index/chatgpt/", "command": "open chat gpt"},
-
+    { "url": "https://openai.com/index/chatgpt/", "command": "open chat gpt" },
     { "url": "https://www.google.com", "command": "open google" },
     { "url": "https://www.youtube.com", "command": "open youtube" },
     { "url": "https://www.facebook.com", "command": "open facebook" },
@@ -53,17 +53,31 @@ const data = [
     { "url": "https://www.nike.com", "command": "open nike" },
     { "url": "https://www.adidas.com", "command": "open adidas" },
     { "url": "https://www.weather.com", "command": "open weather" },
-
     { "url": "https://www.speedtest.net", "command": "open speed test" },
-    {"url":"http://127.0.0.1:5500/Voice-Launch/index.html","command":"open your self"}
+    { "url": "http://127.0.0.1:5500/Voice-Launch/index.html", "command": "open your self" }
 ];
 
-const voicebtn = document.getElementById("voicebtn")
+const voicebtn = document.getElementById("voicebtn");
+
 voicebtn.addEventListener("click", function () {
+    if (isRecognizing) {
+        console.warn("Speech Recognition is already running.");
+        return;
+    }
+
     const tone = document.getElementById('tone');
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
     recognition.lang = "en-UK";
+
+    recognition.onstart = function () {
+        isRecognizing = true;
+    };
+
+    recognition.onend = function () {
+        isRecognizing = false;
+    };
+
     recognition.onresult = function (event) {
         const transcript = event.results[0][0].transcript.toLowerCase();
         document.getElementById("speech").value = transcript;
@@ -74,40 +88,43 @@ voicebtn.addEventListener("click", function () {
         speech.pitch = 1;
         window.speechSynthesis.speak(speech);
 
-        for(let val of data){
-            if(val.command === transcript){
-            page = val.url;
-            break;
+        page = null;
+
+        for (let val of data) {
+            if (val.command === transcript) {
+                page = val.url;
+                break;
             }
         }
         if (!page) {
             tone.play();
             alert("Command not recognized");
-
-
         } else {
-            window.open(page);
-               console.log(transcript);
-                voicebtn.classList.remove("active");
-
-            const Input = transcript;
-            for (let val of data) {
-                if (val.command == Input) {
-                    page = val.url
-                    break;
-                }
-            }
-            // window.location.href = page
             window.open(page, "_blank");
-    
-
+            console.log(transcript);
         }
-
-
-recognition.start();
-
-        console.log(transcript);
     };
 
     recognition.start();
+});
+
+butt.addEventListener('click', () => {
+    const tone = document.getElementById('tone');
+    const transcript = document.getElementById("speech").value.toLowerCase();
+    page = null;
+
+    for (let val of data) {
+        if (val.command === transcript) {
+            page = val.url;
+            break;
+        }
+    }
+
+    if (!page) {
+        tone.play();
+        alert("Command not recognized");
+    } else {
+        window.open(page, "_blank");
+        console.log(transcript);
+    }
 });
