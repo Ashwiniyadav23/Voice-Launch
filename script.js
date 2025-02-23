@@ -59,7 +59,7 @@ const data = [
     { "url": "http://127.0.0.1:5500/Voice-Launch/index.html", "command": "open your self" }
 ];
 
-alert("🚀 Please click the 🎙️ mic icon to search for any site, or type manually and hit the ➕ button to open it in a new tab. {EX: open google} Thank you! 😊")
+alert("🚀 Click the 🎙️ mic icon (or press Ctrl + m) to search for any site, or type it manually and hit the ➕ button to open it in a new tab. For example, try 'open Google.' Thanks for exploring! 😊")
 const style = document.createElement('style');
 
 function applyStyles() {
