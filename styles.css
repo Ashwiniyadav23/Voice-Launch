@@ -3,9 +3,10 @@ body {
     flex-direction: column;
     height: 100vh;
     margin: 0;
-    background: linear-gradient(135deg, #f7e9e9, #e3f2fd);
+    background: linear-gradient(135deg, #f4cbcb, #d1e9fb);
     font-family: 'Arial', sans-serif;
-    margin-left: 40%;
+    overflow: hidden;
+    margin-left: 35%;
 }
 
 h1 {
@@ -13,10 +14,13 @@ h1 {
     padding: 20px;
     color: #333;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-right: 55%;
 }
 
 input {
-    width: 300px;
+    width: 80%;
+    max-width: 300px;
     margin-bottom: 20px;
     padding: 10px;
     font-size: 16px;
@@ -36,34 +40,126 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    width: 150px;
+    width: 80%;
+    max-width: 150px;
     margin-top: 5px;
     background-color: #007BFF;
-    margin-right: 0%;
     color: #fff;
     border: none;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
 }
-/* 
-.reco {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-right: 70%;
-} */
-
 
 button:hover {
     background-color: #0056b3;
 }
+
+.mic {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+}
+
+.mic::before,
+.mic::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+    z-index: 2;
+    box-shadow: 0 0 20px 20px #1e3c72;
+}
+
+.mic::before {
+    width: 40px;
+    height: 40px;
+    background-color: #1e3c72;
+}
+
+.mic::after {
+    width: 250px;
+    height: 250px;
+    background-color: #2a5298;
+    animation: circle-size 0.8s linear infinite alternate;
+}
+
+.mic-icon {
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(5);
+    display: block;
+    width: 16px;
+    height: 12px;
+    border-bottom-left-radius: 120px;
+    border-bottom-right-radius: 120px;
+    border: 2px solid;
+    border-top: 0;
+    margin-top: 20px;
+    z-index: 3;
+}
+
+.mic-icon::before,
+.mic-icon::after {
+    content: '';
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+.mic-icon::before {
+    width: 2px;
+    height: 5px;
+    top: calc(100% + 1px);
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: #fff;
+}
+
+.mic-icon::after {
+    border: 2px solid;
+    width: 8px;
+    height: 18px;
+    left: 50%;
+    top: -10px;
+    border-radius: 4px;
+    transform: translate(-50%, 0);
+}
+
+@keyframes circle-size {
+    from {
+        width: 250px;
+        height: 250px;
+    }
+
+    to {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@keyframes shadow-rotate {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.mic.active {
+   animation: pulse 1s infinite;
+}
+
 @media (max-width: 1056px) {
     body {
-        width: 100%;
-        height: auto;
-        margin-left: 0;
         padding: 20px;
     }
     #speech {
